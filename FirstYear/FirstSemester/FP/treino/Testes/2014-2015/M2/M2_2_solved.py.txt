@@ -1,0 +1,38 @@
+# -*- encoding: utf8 -*-
+
+f = open("DNA_seq.txt")
+codoes = dict()
+for line in f:
+    for i in range(0,len(line)/3):
+        codao = line[i*3:(i*3+3)]
+        print(codao),
+        if codao in codoes:
+            codoes[codao]+=1
+        else:
+            codoes[codao]=1
+
+histogram = []
+for k,v in codoes.items():
+    histogram += [(k, v)]
+
+def quicksort(lista):
+    if len(lista) <= 1:
+        return lista
+    (pk, pv) = lista[0]
+    prv, nxt = [], []
+    for (k, v) in lista[1:]:
+        if v < pv:
+            prv.append((k, v))
+        else:
+            nxt.append((k, v))
+
+    return quicksort(nxt) + [(pk, pv)] + quicksort(prv)
+
+histogram = quicksort(histogram)
+
+ratio = 70.0/histogram[0][1]
+c = 0
+for (k, v) in histogram:
+    c += v
+    print "{}({}): {}".format(k, v, "#"*int(float(v)*ratio))
+print c

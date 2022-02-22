@@ -1,0 +1,140 @@
+# encoding: utf8
+
+def loadJogos(fname):
+	jogos = [[]]
+	f = open(fname)
+	nline = 0
+	jornada = 0
+	jogo = 0
+	for line in f:
+		items = line.strip().split(",")
+		info = (items[1], items[2], int(items[3]), int(items[4]))
+		jogos[jornada].append(info)
+		jogo += 1
+		if jogo == jogosPorJornada:
+			jornada += 1
+			jogo = 0
+			jogos.append([])
+	f.close()
+	jogos.pop()	# elimina ultima jornada incompleta (ou vazia)
+	return jogos
+
+def apostaValida(ap):
+	"""Verifica se aposta é válida: 1, X, 2, ou multipla destas."""
+	# return ap=="1" or ap=="X" or ap=="2"	# Para apostas simples
+	# Para apostas multiplas:
+	return ap in ("1","X","2","1X","12","X2","1X2")
+	# Ou menos rigorosa:
+	for c in ap:
+		if c not in "1X2":
+			return False
+	return len(ap)>0	# para evitar True com ap=""!
+
+def numMultiplas(boletim):
+	"""Número de apostas num boletim (com múltiplas). Devolve 1 num boletim simples."""
+	numApostas = 1
+	for ap in boletim:
+		numApostas *= len(ap)	# requer validação estrita! ap não pode ter repetidos!
+	return numApostas
+
+def resultJogo(jogo):
+	"""Devolve 1, X ou 2 consoante resultado do jogo"""
+	if jogo[HG] > jogo[VG]:
+		r = "1"
+	elif jogo[HG] < jogo[VG]:
+		r = "2"
+	else:
+		r = "X"
+	return r
+
+def apostaCerta(jogo, ap):
+	"""Verifica se uma aposta acertou no jogo"""
+	#return resultJogo(jogo) == ap	# para apostas simples
+	return resultJogo(jogo) in ap	# para apostas multiplas
+
+def printChave(jogosDaJornada):
+	"""Mostra resultados da jornada e chave respetiva"""
+	for j in xrange(len(jogosDaJornada)):
+		jogo = jogosDaJornada[j]
+		print "{:d} {:>20} {:2d}-{:<2d} {:<20} {}".format(j+1, jogo[HT], jogo[HG], jogo[VG], jogo[VT], resultJogo(jogo))
+	
+def scoreBoletim(jogosDaJornada, boletim):
+	"""Pontua um boletim"""
+	certas = 0
+	for j in xrange(len(boletim)):
+		jogo = jogosDaJornada[j]
+		if apostaCerta(jogo, boletim[j]):
+			certas += 1
+	return certas
+
+##### MAIN #####
+
+def main():
+	"""Solução para problema alternativo: tratar de array de boletins."""
+	# Dados constantes (enunciado!)
+	numEquipas = 18
+	jogosPorJornada = numEquipas/2
+
+	# informação dos jogos (será lista de listas de jogos. Cada jogo é tuplo)
+	jogos = loadJogos("Jogos.csv")
+	numJornadas = len(jogos)
+
+	jornada = int(raw_input("Jornada? "))
+	while not (1 <= jornada <= numJornadas):
+		print "Jornada sem resultados!"
+		jornada = int(raw_input("Jornada? "))
+	jornada -= 1
+	
+	fileApostas = "apostas{}.csv".format(jornada+1)
+	#fileApostas = "multiplas{}.csv".format(jornada+1)
+	numBoletins = 0
+	numApostas = 0
+	count = [0]*(jogosPorJornada+1)
+	#loadApostas(fileApostas)
+	f = open(fileApostas)
+	for line in f:	# line: Ana Matos,1,X,2,1,X,2,1,X,2
+		items = line.strip().upper().split(",")
+		#name = int(items[0])
+		boletim = items[1:]
+		numBoletins += 1
+		numApostas += numMultiplas(boletim)
+		certas = scoreBoletim(jogos[jornada], boletim)
+		count[certas] += 1
+	f.close()
+	
+	receita = numApostas*0.40
+	totalPremios = receita*0.60
+
+	# Resultados da jornada e chave vencedora:
+	printChave(jogos[jornada])
+
+	# Estatisticas:
+	print
+	print "Num Boletins:     {:10d}".format(numBoletins)
+	print "Num Apostas:      {:10d}".format(numApostas)
+	print "Receita:          {:10.2f} euros".format(receita)
+	print "Montante prémios: {:10.2f} euros".format(totalPremios)
+
+	# Tabela de prémios
+	print
+	print "Prémio : Acertos : Boletins vencedores : Valor do Prémio"
+	for certas in [9, 8, 7]:
+		if count[certas] > 0:
+			valorPremio = totalPremios/3.0/count[certas]	# pode ser infinito!
+		else:
+			valorPremio = 0.0
+		print "   {:d}º  :    {:1d}    :         {:4d}        : {:10.2f}".format(10-certas, certas, count[certas], valorPremio)
+	
+
+# constantes para indexar "campos" no tuplo de um jogo (podia ser dict)
+# HomeTeam,VisitingTeam,HomeGoals,VisitingGoals
+HT,VT,HG,VG = 0,1,2,3
+
+# Dados constantes (enunciado!)
+numEquipas = 18
+jogosPorJornada = numEquipas/2
+
+main()
+
+
+

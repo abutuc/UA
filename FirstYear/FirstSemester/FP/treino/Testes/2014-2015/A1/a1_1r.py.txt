@@ -1,0 +1,35 @@
+# -*- encoding: utf8 -*-
+numero_secreto = int(raw_input("Numero secreto:"))
+
+#i = 0
+#while i<50:
+#    print ""
+#    i+=1
+
+#for i in xrange(0, 50):
+#    print ""
+
+#print "\n"*50
+
+print "Vamos lá adivinhar"
+
+def tentar(numero_secreto, n_tentativas, tentativa_anterior):
+    tentativa = int(raw_input("Tentativa {}:".format(n_tentativas)))
+
+    if tentativa == numero_secreto:
+        print "Acertou em {} tentativas".format(n_tentativas)
+        return
+
+    if n_tentativas > 1:
+
+        distancia = abs(tentativa-numero_secreto)
+        distancia_anterior = abs(tentativa_anterior-numero_secreto)
+
+        if distancia < distancia_anterior:
+            print "Quente"
+        else:
+            print "Frio"
+
+    tentar(numero_secreto, n_tentativas+1, tentativa)
+
+tentar(numero_secreto, 1, None)

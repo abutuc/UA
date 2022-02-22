@@ -1,0 +1,112 @@
+#encoding: utf8
+
+def validar_numero(numero):
+    c=0
+    if len(numero) < 3:
+        return False
+    for d in numero:
+        if d not in "0123456789":
+            if c == 0 and d == '+':
+                continue
+            return False
+        c+=1
+    return True
+
+def registar_chamada(data):
+    valido = False
+    while not valido:
+        origem = raw_input("Telefone origem?")
+        valido = validar_numero(origem)
+
+    valido = False
+    while not valido:
+        destino = raw_input("Telefone destino?")
+        valido = validar_numero(destino)
+
+    duracao = -1
+    while duracao < 0:
+        duracao = int(raw_input("Duração (s):"))
+
+    if origem not in data:
+        data[origem] = []
+    data[origem].append((destino, duracao))
+
+    return data
+
+def ler_ficheiro(nome_ficheiro,data):
+    fi = open(nome_ficheiro)
+    for line in fi:
+        lista = line.strip().split("\t")
+
+        if lista[0] not in data:
+            data[lista[0]] = []
+        data[lista[0]].append((lista[1], int(lista[2])))
+
+    return data
+
+def ordenar(lista):
+    if len(lista) <= 1:
+        return lista
+
+    return ordenar([p for p in lista[1:] if p < lista[0]]) \
+            + [lista[0]] \
+            + ordenar([n for n in lista[1:] if n >= lista[0]])
+
+def listar_clientes(data):
+    out = "Clientes: "
+    for cliente in ordenar(data.keys()):
+        out += cliente + "  "
+
+    print out
+
+def calcular_custo(origem, destino, duracao):
+    if destino[0] == "2":
+        return duracao*0.02/60
+    if destino[0] == "+":
+        return duracao*0.80/60
+    if destino[0:2] == origem[0:2]:
+        return duracao*0.04/60
+    return duracao*0.10/60
+
+def facturar(data):
+    cliente = ""
+    while cliente not in data.keys():
+        cliente = raw_input("Cliente? ")
+
+    print "Fatura do cliente {}".format(cliente)
+    print "Destino\t\tDuração\tCusto"
+
+    total = 0
+    for (destino, duracao) in data[cliente]:
+        custo = calcular_custo(cliente, destino, duracao)
+        print "{}\t\t{}\t{:.2f}".format(destino, duracao, custo)
+        total+=custo
+
+    print "\t\t\tTotal:\t{:.2f}".format(total)
+
+def menu(data):
+
+    op = ""
+    while op not in range(1,6):
+        print "1) Registar chamada"
+        print "2) Ler ficheiro"
+        print "3) Listar clientes"
+        print "4) Fatura"
+        print "5) Terminar"
+        op = int(raw_input("0) Opção?"))
+
+    if op == 1:
+        data = registar_chamada(data)
+    elif op == 2:
+        nome_ficheiro = raw_input("Ficheiro? ")
+        data = ler_ficheiro(nome_ficheiro, data)
+    elif op == 3:
+        listar_clientes(data)
+    elif op == 4:
+        facturar(data)
+    elif op == 5:
+        return
+
+    menu(data)
+
+menu({})

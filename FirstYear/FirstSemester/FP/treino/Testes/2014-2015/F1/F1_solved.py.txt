@@ -1,0 +1,127 @@
+# -*- encoding: utf8 -*-
+# NOME:
+# NMEC:
+# Use este ficheiro para o exercicio 1
+
+def tarifa_simples():
+    f = open("contador.txt")
+    primeira = None
+    for l in f:
+        if primeira == None:
+            primeira = int(l)/1000
+        ultima = int(l)/1000
+
+    return ultima - primeira
+
+
+#implementação naive:
+def tarifa_bi_horaria_diario():
+    f = open("contador.txt")
+    m = 0
+    m0 = 0
+    m8 = 0
+    m22 = 0
+    vazio = 0
+    fora_vazio = 0
+    for l in f:
+        hora = m%24
+        if hora == 0:
+            m0_antigo = m0
+            m0 = int(l)
+            if m8 != 0:
+                vazio += (m8-m0_antigo) + (m0-m22)
+                fora_vazio += m22-m8
+        if hora == 8:
+            m8 = int(l)
+        if hora == 22:
+            m22 = int(l)
+        m+=1
+
+    return vazio, fora_vazio
+
+def tarifa_bi_horaria_diario2():
+    f = open("contador.txt")
+    m = 0
+    vazio = 0
+    fora_vazio = 0
+    semana = ["dom", "seg", "ter", "qua", "qui", "sex", "sab", "dom2"]
+    medidas = dict()
+    for d in semana:
+        medidas[d] = dict()
+
+    for l in f:
+        dia_semana = m/24
+        hora= m%24
+        medidas[semana[dia_semana]][hora] = int(l)/1000
+        m+=1
+
+    for dia in range(0,7):
+        d = medidas[semana[dia]]
+        ds = medidas[semana[dia+1]]
+        vazio += d[8] - d[0] + ds[0] - d[22]
+        fora_vazio += d[22] - d[8]
+
+    return vazio, fora_vazio
+
+
+def tarifa_bi_horaria_semanal():
+    f = open("contador.txt")
+    m = 0
+    vazio = 0
+    fora_vazio = 0
+    semana = ["dom", "seg", "ter", "qua", "qui", "sex", "sab", "dom2"]
+    medidas = dict()
+    for d in semana:
+        medidas[d] = dict()
+
+    for l in f:
+        dia_semana = m/24
+        hora= m%24
+        medidas[semana[dia_semana]][hora] = int(l)/1000
+        m+=1
+
+    #domingo:
+    d = medidas["dom"]
+    ds = medidas["seg"]
+    vazio += ds[0] - d[0]
+    #semana
+    for dia in range(1,6):
+        d = medidas[semana[dia]] #medidas de um dia
+        ds = medidas[semana[dia+1]] #medidas do dia seguinte
+        vazio += d[7] - d[0]
+        fora_vazio += ds[0] - d[7]
+    #sabado
+    d = medidas["sab"]
+    ds = medidas["dom2"]
+    vazio += d[10] - d[0] + d[18]- d[13] + ds[0] - d[22]
+    fora_vazio += d[13] - d[10] + d[22] - d[18]
+
+    return vazio, fora_vazio
+
+print "Tarifa Simples (kWh): ", tarifa_simples()
+simples = 0.1528*(tarifa_simples())
+print "Tarifa Simples (Euros): {:0.2f}".format(simples)
+vazio, fora_vazio = tarifa_bi_horaria_diario2()
+diario = 0.1785*(fora_vazio) + 0.0946*(vazio)
+print ""
+print "Tarifa Bi-Horária - ciclo diario - vazio (kWh): ", vazio
+print "Tarifa Bi-Horária - ciclo diario - vazio (Euros): {:0.2f}".format(0.0946*(vazio))
+print "Tarifa Bi-Horária - ciclo diario - fora-vazio (kWh): ", fora_vazio
+print "Tarifa Bi-Horária - ciclo diario - fora-vazio (Euros): {:0.2f}".format(0.1785*(fora_vazio))
+print "Tarifa Bi-Horária - ciclo diario - Total (Euros): {:0.2f}".format(diario)
+print ""
+vazio, fora_vazio = tarifa_bi_horaria_semanal()
+semanal = 0.1785*(fora_vazio) + 0.0946*(vazio)
+print "Tarifa Bi-Horária - ciclo semanal - vazio (kWh): ", vazio
+print "Tarifa Bi-Horária - ciclo semanal - vazio (Euros): {:0.2f}".format(0.0946*(vazio))
+print "Tarifa Bi-Horária - ciclo semanal - fora-vazio (kWh): ", fora_vazio
+print "Tarifa Bi-Horária - ciclo semanal - fora-vazio (Euros): {:0.2f}".format(0.1785*(fora_vazio))
+print "Tarifa Bi-Horária - ciclo semanal - Total (Euros): {:0.2f}".format(semanal)
+print ""
+if simples < diario and simples < semanal:
+    print "Tarifário Simples é o mais apropriado"
+elif semanal < diario:
+    print "Tarifário Bi-Horário com ciclo semanal é o mais apropriado"
+else:
+    print "Tarifário Bi-Horário com ciclo diário é o mais apropriado"
+

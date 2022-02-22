@@ -1,0 +1,118 @@
+# -*- encoding: utf8 -*-
+# NOME:
+# NMEC:
+# Use este ficheiro para o exercicio 1
+
+def lerJornadas():
+    f = open("Jornadas.csv")
+    jornadas = dict() #vamos utilizar um dicionario para as jornadas e uma lista para os jogos por jornadas
+                      #embora não controlemos a ordem dos dicionários, controlamos a ordem da lista
+    for line in f:
+        l = line.strip().split(",")
+        j = int(l[0]) #jornada
+        h = l[1] #casa
+        v = l[2] #visitante
+        if not j in jornadas.keys():
+            jornadas[j] = []
+        jornadas[j].append((h, v)) #cada jogo é guardaado como um tuplo dentro da lista da jornada respectiva
+    f.close()
+    return jornadas
+
+def lerAposta(jornada, jornadas):
+    aposta = dict()
+
+    f = open("Jornada"+str(jornada)+".csv", "w")
+    for i,jogo in enumerate(jornadas[jornada]):
+        perg = "{} {} vs {}: ".format(i+1, jogo[0], jogo[1]) # +1 para acertar os indices com os jogos
+        op = ""
+#        while op not in ['1', 'X', '2']:  #versao sem apostas multiplas
+        while op not in ['1', 'X', '2', '1X2', '1X', 'X2', '12']:
+            op = raw_input(perg)
+        f.write("{}, {}\n".format(i+1, op)) #reparem que apenas é pedido para guardar o numero do jogo e o palpite
+        aposta[jogo[0]+jogo[1]] = op #o dicionario com a chave=casa+visitante será util na alinea b)
+    f.close()
+    return aposta
+
+def verResultados(jornada, aposta):
+    f = open("Jogos.csv")
+
+    certas = 0
+    j = 0 #Conta o numero de linhas, cada jornada são 9 linhas j%9 dá nos o numero do jogo e j//9 +1 a jornada
+    for line in f:
+        if j//9 +1  == jornada:
+            l = line.strip().split(",")  #apenas processamos as linhas correspondentes a jornada em causa
+            d = l[0]
+            h = l[1]
+            v = l[2]
+            hg = int(l[3])
+            vg = int(l[4])
+            if j%9 == 0:    #primeiro jogo da jornada? vamos imprimir o cabeçalho! (garante que apenas imprime o cabeçalho se já existirem resultados para essa jornada
+                print "Jornada {}".format(jornada)
+
+            #determinar o resultado
+            if hg > vg:
+                r='1'
+            elif hg < vg:
+                r='2'
+            else:
+                r='X'
+
+            #determinar se acertamos
+            if r in aposta[h+v]: #era possivel usar == mas desta forma suportamos multiplas
+                a = 'CERTO'
+                certas +=1
+            else:
+                a = 'ERRADO'
+            print "{} {:>20s} {}-{} {:<20s}: {}\t({})".format(j%9 + 1, h, hg, vg, v, aposta[h+v], a)
+        j += 1
+    f.close()
+    return certas
+
+def determinarCusto(aposta):
+    simples = 0
+    duplas = 0
+    triplas = 0
+    for k in aposta.keys(): #contar todas as apostas
+        apostas = len(aposta[k])
+        if apostas == 1:
+            simples +=1
+        elif apostas == 2:
+            duplas +=1
+        elif apostas == 3:
+            triplas +=1
+
+    return 0.40 * (1**simples * 2**duplas * 3**triplas) #tal como está no enunciado!
+
+#Outra solução, mais sucinta que podia ser usada
+def determinarCusto2(aposta):
+    apostas = 1
+    for k in aposta.keys(): #contar todas as apostas
+        apostas *= len(aposta[k])
+    return 0.40*apostas
+
+
+saldo = 0.0
+jornadas = lerJornadas()
+jornada = -1
+while jornada != 0:
+    jornada = int(raw_input("Jornada? "))
+    if jornada < 1 or jornada > len(jornadas): #se a jornada for invalida voltamos ao inicio do ciclo
+        continue
+
+    aposta = lerAposta(jornada, jornadas)
+    certas = verResultados(jornada, aposta)
+    saldo -= determinarCusto(aposta)
+    if certas == 9:
+        saldo += 5000
+        p = "1º PRÉMIO"
+    elif certas == 8:
+        saldo += 1000
+        p = "2º PRÉMIO"
+    elif certas == 7:
+        saldo += 100
+        p = "3º PRÉMIO"
+    else:
+        p = "SEM PRÉMIO"
+
+    print "TEM {} CERTAS. {}.".format(certas, p)
+    print "Saldo: {:.2f} euro".format(saldo)

@@ -1,0 +1,15 @@
+fp = open("passos.txt")
+km_por_semana = 0
+cal_media_dia = 0
+
+for passos in fp:
+    passos_por_dia = int(passos)
+    km_por_dia = passos_por_dia * 1.2 / 1000
+    print "Km por dia: {}".format(km_por_dia)
+    km_por_semana += km_por_dia
+    cal_por_dia = km_por_dia * 32
+    print "Calorias por dia: {}".format(cal_por_dia)
+    cal_media_dia += cal_por_dia
+
+print "Km por semana: {}".format(km_por_semana)
+print "Calorias em media por dia: {}".format(cal_media_dia/7)
