@@ -1,0 +1,1 @@
+Na cadeira de Fundamentos de Programção é extremamente importante tentar resolver todos os guiões na própria aula, para além de depois terem tempo livre para outras cadeiras também irão treinar desenvolver código de forma rápida que será uma mais valia para os testes práticos.
