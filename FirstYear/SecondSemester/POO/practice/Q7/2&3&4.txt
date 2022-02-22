@@ -1,0 +1,23 @@
+2.
+System.out.println(p1==p2); Vai retornar falso, já que a operação p1==p2, está a comparar as referências na memória de 
+cada instância. Como são instâncias diferentes, o resultado da comparação será false.
+System.out.println(p1.equals(p2)); Irá retornar falso, caso o programador da classe Pessoa não tenha modificado (ou seja, ter feito override da operação
+equals() pré-definida). Caso o programador tenha de facto reprogramado o método equals() da classe Pessoa para comparar o conteúdo e não as referências das
+instâncias, então o valor retornado será true.
+
+
+3.
+Válido
+Válido
+Inválido
+Válido
+Inválido
+
+
+
+T ref1 = new S();
+// OK DESDE QUE TODO O S SEJA UM T
+
+
+4.
+public void drawSomeFigure(Figura f);

@@ -1,0 +1,5 @@
+Escreva um programa que leia um ficheiro de texto à sua escolha e que conte o número de 
+palavras diferentes existentes. 
+Por exemplo, o resultado poderá ser:
+escreva
+Vrei sa pleci dar numa numa ei, numa numa ei, numa numa numa ei.
