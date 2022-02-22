@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name=”viewport”>
+    <title>UAPLAY - Home</title>
+    <link href="../Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="../Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="geral.css" rel="stylesheet" />
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="welcome_page.html" title="UAPLAY"><i class="fa fa-play-circle-o fa-2x" aria-hidden="true"></i></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="main_page.html">Home<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="movies.html">Movies<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="series.html">Series<span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+                <div class="nav-item dropdown float-left">
+                    <a href='#' class="nav-link dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a href="titles.html" class="dropdown-item">All Titles</a>
+                        <a href="categories.html" class="dropdown-item">Categories</a>
+                        <a href="actors.html" class="dropdown-item">Actors</a>
+                        <a href="directors.html" class="dropdown-item">Directors</a>
+                        <a href="countries.html" class="dropdown-item">Countries</a>
+                        <a href="ratings.html" class="dropdown-item">Ratings</a>
+                    </div>
+                </div>
+                <div class="nav-item float-left"><a class="nav-link" title="Help!" href='help.html'><i class="fa fa-question-circle fa-1x" aria-hidden="true"></i></a></div>
+                <div class="nav-item float-left"><a class="nav-link" title="Our History!" href='about_us.html'><i class="fa fa-book fa-1x" aria-hidden="true"></i></a></div>
+            
+            </div>
+        </div>
+    </nav>
+
+    <h1 id="one_m">What do you wanna see?</h1>
+    <div class="container-fluid">
+        <div class="row" style="height:250px">
+            <div id="two_m" class="col-6">
+                <a href="movies.html" class="fancy bo"> Movies </a>
+            </div>
+            <div id="three_m" class="col-6" style="height:250px">
+                <a href="series.html" class="fancy series bo"> Series </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <h1 id="four_m" style="margin-top:1%;">Ranging from different</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div id="five_m" class="col-6" style="height:250px">
+                <a href="categories.html" class="fancy bo"> Categories </a>
+            </div>
+            <div id="six_m" class="col-6" style="height:250px">
+                <a href="ratings.html" class="fancy bo"> Ratings </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <h1 id="seven_m" style="margin-top:1%;">All brought to you by</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div id="eight_m" class="col-4" style="height:250px">
+                <a href="actors.html" class="fancy bo"> Actors </a>
+            </div>
+            <div id="nine_m" class="col-4" style="height:250px">
+                <a href="directors.html" class="fancy stats bo"> Directors </a>
+            </div>
+            <div id="ten_m" class="col-4" style="height:250px">
+                <a href="countries.html" class="fancy stats bo"> Countries </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <h1 id="eleven_m" style="margin-top:1%;">Find out about our history</h1>
+            </div>
+        </div>
+        <div id="twelve_m" class="row">
+            <div class="col-12" style="height:250px">
+                <a href="about_us.html" class="fancy bo">About Us</a>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar bottom d-none" id="footer" role="navigation">
+        <div class="container">
+            <div class="navbar-text small"><a href="https://www.ua.pt/pt/uc/12289" title="ITW">&copy;ITW2020 - Introdução às Tecnologias Web</a></div>
+            <div class="navbar-right navbar-text small d-sm-none d-md-block"><a href="http://www.ua.pt" title="Universidade de Aveiro">Universidade de Aveiro</a></div>
+        </div>
+    </nav>
+    <script src="../Scripts/jquery-3.5.1.min.js"></script>
+    <script src="../Scripts/bootstrap.bundle.min.js"></script>
+    <script src="../Scripts/knockout-3.5.1.js"></script>
+    <script>
+        $(document).ready(function() { 
+            $('#one_m, #two_m, #three_m, #four_m, #five_m, #six_m, #seven_m, #eight_m, #nine_m, #ten_m, #eleven_m, #twelve_m').each(function(fadeInDiv) {
+                $(this).delay(fadeInDiv * 158).fadeIn(500);
+            });
+        });
+
+        window.onscroll = function() {
+        $("#footer").removeClass("d-none");
+        }
+    </script>
+</body>
+</html>

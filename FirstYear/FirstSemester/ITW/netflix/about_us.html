@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name=”viewport”>
+    <title>UAPLAY - About Us</title>
+    <link href="../Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="../Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="geral.css" rel="stylesheet" />
+    <style>
+        p {
+            font-size: 20px;
+        
+        }
+        .jumbotron {
+                margin:0px; padding:0px; height:400px; margin-bottom:20px; 
+                background: transparent; background-position:center center; 
+                background-repeat:no-repeat; background-size:cover; 
+                background-image: url('../images/ua.png');}
+        
+        .nav-tabs li {
+            font-size: 20px;
+        }
+        li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        li :hover {
+            color: #90EE90;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="welcome_page.html" title="UAPLAY"><i class="fa fa-play-circle-o fa-2x" aria-hidden="true"></i></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="main_page.html">Home<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="movies.html">Movies<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="series.html">Series<span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+                <div class="nav-item dropdown float-left">
+                    <a href='#' class="nav-link dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a href="titles.html" class="dropdown-item">All Titles</a>
+                        <a href="categories.html" class="dropdown-item">Categories</a>
+                        <a href="actors.html" class="dropdown-item">Actors</a>
+                        <a href="directors.html" class="dropdown-item">Directors</a>
+                        <a href="countries.html" class="dropdown-item">Countries</a>
+                        <a href="ratings.html" class="dropdown-item">Ratings</a>
+                    </div>
+                </div>
+                <div class="nav-item active float-left"><a class="nav-link" title="Help!" href='help.html'><i class="fa fa-question-circle fa-1x" aria-hidden="true"></i></a></div>
+                <div class="nav-item float-left"><a class="nav-link" title="Our History!" href='about_us.html'><i class="fa fa-book fa-1x" aria-hidden="true"></i></a></div>
+            </div>
+        </div>
+    </nav>
+    <div class="jumbotron"> 
+    </div>
+    <div class="container">
+        <h2>About Us</h2>
+        <div class="container">
+        <p>UAPLAY consists of a website that provides the User a catalog to search and find the perfect movie/series from Netflix.</p>
+        <p>Our goal is to share the content from a Netflix API provided by our professor. Therefore we tried to portray a catalog/portfolio website.</p>
+            <p> This website was developed as project for ITW subject in the UA Computer Science major. 
+            This subject comes as an introductory course for Web Developing, teaching the basics, such as HTML5, CSS, JS, jQuery and KO.</p>
+            
+        <div class="row">
+            <div id="draggable"class="col-4"><img src="../images/html5.png" alt="HTML5" width="50px" height="50px"></div>
+            <div class="col-4"><img src="../images/CSS.png" alt="CSS" width="35px" height="50px"></div>
+            <div class="col-4"><img src="../images/JS.png" alt="HTML5" width="36px" height="50px"></div>
+        </div>
+            <p style="padding-top: 5%;">Challenge: Can you align the images above to match their programming language?<i class="fa fa-smile-o fa-2x" style="color:#FFFFFF; padding-left: 2%;" aria-hidden="true"></i></p>
+            <p style="padding-top: 5%;">This project was made in pairs. The pair that built this website was composed by André Butuc and Diogo Pedrosa.</p>
+            <p style="padding-top: 2%;">Team Members Preferences: </p>
+            <table class="table table-bordered" style="font-size:14px; padding-top: 2%;">
+                <thead style="color: #90EE90">
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Movie</th>
+                    <th scope="col">Series</th>
+                    <th scope="col">Actor</th>
+                    <th scope="col">Director</th>
+                  </tr>
+                </thead>
+                <tbody style="color: #FFFFFF">
+                  <tr>
+                    <th scope="row">André</th>
+                    <td>Inception</td>
+                    <td>Peaky Blinders</td>
+                    <td>Leonardo DiCaprio</td>
+                    <td>Christopher Nolan</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Diogo</th>
+                    <td>Home Alone</td>
+                    <td>Prison Break</td>
+                    <td>Wentworth Miller</td>
+                    <td>Raja Gosnell</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="container padtop">
+                <ul class="nav nav-tabs">
+                    <li class="active" style="margin-right: 5%;"><a data-toggle="tab" href="#home">André</a></li> 
+                    <li><a data-toggle="tab" href="#menu1">Diogo</a></li>
+                </ul>
+                <div class="tab-content" style="min-height: 400px; padding-top: 2%;"> 
+                    <div class="tab-pane fade show active" id="home">
+                        <p style="color: white">Hi. I'm André, I'm <span class="badge">18</span> years old and I'm studying Computer Science in the Univerisity of Aveiro.</p>
+                        <img width="200px" height="200px" src="../images/lion.jpg">
+                    </div>
+                <div class="tab-pane fade" id="menu1"> 
+                    <p style="color: white">Hi. I'm Diogo, I'm <span class=badge>20</span> years old and I'm studying Mathematics in the Univerisity of Aveiro.</p>
+                    <img width="200px" height="134px" src="../images/gato.jpg">
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar bottom" style="margin-top: 0;" id="footer" role="navigation">
+        <div class="container">
+            <div class="navbar-text small"><a href="https://www.ua.pt/pt/uc/12289" title="ITW">&copy;ITW2020 - Introdução às Tecnologias Web</a></div>
+            <div class="navbar-right navbar-text small d-sm-none d-md-block"><a href="http://www.ua.pt" title="Universidade de Aveiro">Universidade de Aveiro</a></div>
+        </div>
+    </nav>
+
+    <script src="../Scripts/jquery-3.5.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="../Scripts/bootstrap.bundle.min.js"></script>
+    <script src="../Scripts/knockout-3.5.1.js"></script>
+    <script type="text/javascript">
+    $(function(){
+        $(".col-4").draggable();
+    });
+    </script>
+</body>
+</html>

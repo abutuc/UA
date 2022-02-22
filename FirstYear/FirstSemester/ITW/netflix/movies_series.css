@@ -1,0 +1,37 @@
+.carousel-control-next,
+.carousel-control-prev /*, .carousel-indicators */ {
+    filter: invert(100%);
+}
+
+.carousel-indicators li {
+    background-color: #90EE90;
+}
+.ser{
+    text-align:center; 
+    color:#90EE90;
+}
+.ser:link, .ser:visited {
+    color:  #90EE90;
+    text-decoration: none;
+}
+
+.card {
+    width:100%; 
+    margin:0px; 
+    height:97%;
+}
+
+.card-header {
+    color: #90EE90; 
+    font-size:1.1em;
+    background-color: #276f3f;
+}
+
+.card-body {
+    background-color:#276f3f;
+    padding-left: 5%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    color: #FFFFFF;
+}
+

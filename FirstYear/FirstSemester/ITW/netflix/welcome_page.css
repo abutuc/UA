@@ -1,0 +1,59 @@
+﻿@import url(https://fonts.googleapis.com/css2?family=Anton&family=Suez+One&display=swap);
+body {
+    background-color: #006400;
+    font-family: 'Suez One', 'Anton', 'serif', 'sans-serif';
+}
+h1 {
+    color:#90EE90;
+    font-size: 10vw;
+    text-align: center;
+    text-shadow: 0.7vw 0.7vw #333;
+}
+
+.btn {
+    color:#90EE90;
+    border-color:#90EE90;
+    border-width: 6px;
+    -webkit-box-shadow: 9px 7px 5px rgba(50, 50, 50, 0.77);
+    -moz-box-shadow: 9px 7px 5px rgba(50, 50, 50, 0.77);
+    box-shadow: 9px 7px 5px rgba(50, 50, 50, 0.77);
+}
+.btn:hover{
+    background-color:#90EE90;
+    color:#006400;
+}
+span {
+    margin-top: 10%;
+    color:#90EE90;
+    text-shadow: 0.1em 0.1em #333;
+}
+.bola {
+    padding-top: 40px;
+    color:#90EE90;
+    font-size: 2.5em;
+    margin-left: 1%;
+    text-align: center;
+    vertical-align: central;
+    border-radius: 20%;
+    height: 230px;
+    width: 230px;
+    border: 8px solid #000000;
+    border-color:#90EE90;
+    text-shadow: 0.1em 0.1em #333;
+    -webkit-box-shadow: 9px 7px 5px rgba(50, 50, 50, 0.77);
+    -moz-box-shadow: 9px 7px 5px rgba(50, 50, 50, 0.77);
+    box-shadow: 9px 7px 5px rgba(50, 50, 50, 0.77);
+}
+
+.btn {
+    width: fit-content;
+    height: fit-content;
+}
+
+a {
+    font-size: 2vw;
+}
+
+#div1, #div2, #div3, #div4, #div5, #div6 {
+    display: none;
+}

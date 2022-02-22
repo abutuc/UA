@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name=”viewport”>
+    <title>Netflix - Ratings</title>
+    <link href="../Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="../Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="geral.css" rel="stylesheet"/>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="welcome_page.html" title="UAPLAY"><i class="fa fa-play-circle-o fa-2x" aria-hidden="true"></i></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="main_page.html">Home<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="movies.html">Movies<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="series.html">Series<span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+                <form class="form-inline my-3 my-lg-0">
+                    <div class="ui-widget"><input class="form-control mr-sm-3" type="search" placeholder="Search" id="search" data-bind="value: ratingSearch" aria-label="Search"></div>
+                    <button class="btn my-3 my-sm-0 d-none" type="reset" id="reset" data-bind="click: reset">Reset</button>
+                    <button class="btn my-3 my-sm-0" type="submit" id="searchbtn" data-bind="click: search">Search</button>
+                </form>
+                <div class="nav-item dropdown float-left">
+                    <a href='#' class="nav-link dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a href="titles.html" class="dropdown-item">All Titles</a>
+                        <a href="categories.html" class="dropdown-item">Categories</a>
+                        <a href="actors.html" class="dropdown-item">Actors</a>
+                        <a href="directors.html" class="dropdown-item">Directors</a>
+                        <a href="countries.html" class="dropdown-item">Countries</a>
+                        <a href="ratings.html" class="dropdown-item active">Ratings</a>
+                    </div>
+                </div>
+                <div class="nav-item float-left"><a class="nav-link" title="Help!" href='help.html'><i class="fa fa-question-circle fa-1x" aria-hidden="true"></i></a></div>
+                <div class="nav-item float-left"><a class="nav-link" title="Our History!" href='about_us.html'><i class="fa fa-book fa-1x" aria-hidden="true"></i></a></div>
+            </div>
+        </div>
+    </nav>
+      <div class="container d-none" id="categories1">
+        <h2><span data-bind="text: displayName"></span> <i class="fa fa-star-half-o" aria-hidden="true"></i></h2>
+        <!-- ko if:records().length > 0 -->
+        <div class="col-12 small">
+            <div class="row">
+                <p class="mr-auto pt-2">
+                    <span class="d-none" id="total_search" data-bind="text: 'Ratings Found:  ' + RatingsSearch()"></span>
+                    <span id="span2" data-bind="html: 'Ratings: '+ totalRecords()"></span><br><br>
+                </p>
+            </div>
+        </div>
+        <!-- /ko -->
+        <div class="clearfix"></div>
+        <h3 class="d-none" id="NoResults"></h3>
+        <div class="container content">
+            <div class="row" data-bind="foreach: records">
+                <div class="col-6 col-lg-3 text-center categories_div"><a class="categories" data-bind="attr: {href:'./ratingDetails.html?id='+Id + '&page=1&pagesize=20&titles=' + Titles}">
+                    <span style="font-size: 1.1em; " data-bind="text:Code"></span>
+                    <br>
+                    <span data-bind="text:Titles"></span><i style="color: #ffffff; padding-left: 5%;"class="fa fa-film" aria-hidden="true"></i></a>
+                </div>
+            </div>
+        </div> 
+    </div>
+    <nav class="navbar bottom d-none" id="footer" role="navigation">
+        <div class="container">
+            <div class="navbar-text small"><a href="https://www.ua.pt/pt/uc/12289" title="ITW">&copy;ITW2020 - Introdução às Tecnologias Web</a></div>
+            <div class="navbar-right navbar-text small d-sm-none d-md-block"><a href="http://www.ua.pt" title="Universidade de Aveiro">Universidade de Aveiro</a></div>
+        </div>
+    </nav>
+    <script src="../Scripts/jquery-3.5.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="../Scripts/bootstrap.bundle.min.js"></script>
+    <script src="../Scripts/knockout-3.5.1.js"></script>
+    <script src="ratings.js"></script>
+</body>
+</html>
